@@ -1,0 +1,30 @@
+#!/bin/sh
+
+function createFilesList() {
+    find $PWD -name "*.h" -o -name "*.c" -o -name "*.cc" > cscope.files
+}
+
+function createCscope() {
+    cscope -Rbq -i cscope.files
+}
+
+function createTags() {
+    ctags -R --languages=c --langmap=c:+.h -h +.h --c-kinds=+px --fields=+iaS --extra=+q $PWD
+}
+
+
+if [ "$1" = "" ]; then
+    $(createFilesList)
+    $(createCscope)
+    $(createTags)
+else
+    if [[ "$1" =~ "f" ]]; then
+        $(createFilesList)
+    fi
+    if [[ "$1" =~ "c" ]]; then
+        $(createCscope)
+    fi
+    if [[ "$1" =~ "t" ]]; then
+        $(createTags)
+    fi
+fi
