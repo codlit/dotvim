@@ -1,3 +1,0 @@
-#!/bin/sh
-#ctags -R --languages=javascript --javascript-kinds=+fpmv --fields=+iaS $PWD
-# jsctags $PWD

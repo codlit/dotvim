@@ -1,0 +1,47 @@
+#!/bin/sh
+
+function CreateFilesList() {
+    find $PWD -name "*.h" -o -name "*.c" -o -name "*.cc" > tags.files
+}
+
+function CreateGtags() {
+    gtags -f tags.files
+}
+
+function CreateCscope() {
+    cscope -Rbq -i tags.files
+}
+
+function CreateTags() {
+    ctags -R --languages=c --langmap=c:+.h -h +.h --c-kinds=+px --fields=+iaS --extra=+q -L tags.files
+}
+
+function Usage() {
+    fn=`basename $0`
+    echo "Usage: $fn [hfct]"
+    echo "  h    help information"
+    echo "  f    find target files to tags.files"
+    echo "  g    gtags"
+    # echo "  c    create cscope symbol files"
+    echo "  t    ctags"
+}
+
+
+if [ "$1" = "" ];then
+    Usage $0
+elif [ "$1" = "h" ];then
+    Usage $0
+else
+    if [[ "$1" =~ "f" ]] ;then
+        CreateFilesList
+    fi
+    if [[ "$1" =~ "c" ]] ;then
+        CreateCscope
+    fi
+    if [[ "$1" =~ "g" ]] ;then
+        CreateGtags
+    fi
+    if [[ "$1" =~ "t" ]] ;then
+        CreateTags
+    fi
+fi

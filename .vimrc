@@ -218,55 +218,88 @@ if gitroot != ''
     let &tags = &tags . ',' . gitroot . '/.git/tags'
 endif
 
-" cscope -Rbkq
-"   -R:在生成索引文件时, 搜索子目录树中的代码
-"   -b:只生成索引文件, 不进入cscope目录
-"   -k:生成索引文件时, 不搜索/usr/include目录
-"   -q:生成cscope.in.out和cscope.po.out文件, 加快cscope的索引速度
-"   cscope setting [[[1
-if has("cscope") && executable("cscope")
-    " 设置 [[[2
-    set csto=1
-    set cst
-    set cscopequickfix=s-,c-,d-,i-,t-,e-
-    " add any database in current directory
-    function! Lilydjwg_csadd()
-        set nocsverb
-        if g:gitroot != '' && filereadable(g:gitroot . '/.git/cscope.out')
-            exe 'cs add ' . g:gitroot . '/.git/cscope.out'
-        endif
-        if filereadable(expand('%:h:p') . "/cscope.out")
-            exe 'cs add ' . expand('%:h:p') . '/cscope.out'
-        elseif filereadable(expand('%:h:p') . "/../cscope.out")
-            exe 'cs add ' . expand('%:h:p') . '/../cscope.out'
-        elseif filereadable("cscope.out")
-            cs add cscope.out
-        endif
-        set csverb
-    endfunction
-    autocmd BufRead *.c,*.cpp,*.h call Lilydjwg_csadd()
-    " 映射 [[[2
-    " 查找C语言符号, 即查找函数名、宏、枚举值等出现的地方
-    nmap css :cs find s <C-R>=expand("<cword>")<CR><CR>
-    " 查找函数、宏、枚举等定义的位置, 类似ctags所提供的功能
-    nmap csg :cs find g <C-R>=expand("<cword>")<CR><CR>
-    " 查找本函数调用的函数
-    nmap csd :cs find d <C-R>=expand("<cword>")<CR><CR>
-    " 查找调用本函数的函数
-    nmap csc :cs find c <C-R>=expand("<cword>")<CR><CR>
-    " 查找指定的字符串
-    nmap cst :cs find t <C-R>=expand("<cword>")<CR><CR>
-    " 查找egrep模式, 相当于egrep功能, 但查找速度快多了
-    nmap cse :cs find e <C-R>=expand("<cword>")<CR><CR>
-    " 查找并打开文件, 类似vim的find功能
-    nmap csf :cs find f <C-R>=expand("<cfile>")<CR><CR>
-    " 查找包含本文件的文件
-    nmap csi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-    " 生成新的数据库 "重新在ft_*.vim中定义
-    "nmap csn :lcd %:p:h<CR>:!my_cscope<CR>
-    " 自己来输入命令
-    nmap cs<Space> :cs find
-endif
+" " cscope -Rbkq  (replaced by gtags) {{{
+" "   -R:在生成索引文件时, 搜索子目录树中的代码
+" "   -b:只生成索引文件, 不进入cscope目录
+" "   -k:生成索引文件时, 不搜索/usr/include目录
+" "   -q:生成cscope.in.out和cscope.po.out文件, 加快cscope的索引速度
+" "   cscope setting [[[1
+" if has("cscope") && executable("cscope")
+"     " 设置 [[[2
+"     set csto=1
+"     set cst
+"     set cscopequickfix=s-,c-,d-,i-,t-,e-
+"     " add any database in current directory
+"     function! Lilydjwg_csadd()
+"         set nocsverb
+"         if g:gitroot != '' && filereadable(g:gitroot . '/.git/cscope.out')
+"             exe 'cs add ' . g:gitroot . '/.git/cscope.out'
+"         endif
+"         if filereadable(expand('%:h:p') . "/cscope.out")
+"             exe 'cs add ' . expand('%:h:p') . '/cscope.out'
+"         elseif filereadable(expand('%:h:p') . "/../cscope.out")
+"             exe 'cs add ' . expand('%:h:p') . '/../cscope.out'
+"         elseif filereadable("cscope.out")
+"             cs add cscope.out
+"         endif
+"         set csverb
+"     endfunction
+"     autocmd BufRead *.c,*.cpp,*.h call Lilydjwg_csadd()
+"     " 映射 [[[2
+"     " 查找C语言符号, 即查找函数名、宏、枚举值等出现的地方
+"     nmap css :cs find s <C-R>=expand("<cword>")<CR><CR>
+"     " 查找函数、宏、枚举等定义的位置, 类似ctags所提供的功能
+"     nmap csg :cs find g <C-R>=expand("<cword>")<CR><CR>
+"     " 查找本函数调用的函数
+"     nmap csd :cs find d <C-R>=expand("<cword>")<CR><CR>
+"     " 查找调用本函数的函数
+"     nmap csc :cs find c <C-R>=expand("<cword>")<CR><CR>
+"     " 查找指定的字符串
+"     nmap cst :cs find t <C-R>=expand("<cword>")<CR><CR>
+"     " 查找egrep模式, 相当于egrep功能, 但查找速度快多了
+"     nmap cse :cs find e <C-R>=expand("<cword>")<CR><CR>
+"     " 查找并打开文件, 类似vim的find功能
+"     nmap csf :cs find f <C-R>=expand("<cfile>")<CR><CR>
+"     " 查找包含本文件的文件
+"     nmap csi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+"     " 生成新的数据库 "重新在ft_*.vim中定义
+"     "nmap csn :lcd %:p:h<CR>:!my_cscope<CR>
+"     " 自己来输入命令
+"     nmap cs<Space> :cs find
+" endif  "}}}
+
+" GNU GLOBAL
+set cscopeprg=gtags-cscope
+" add any database in current directory
+function! GTAGS_add()
+    set nocsverb
+    if g:gitroot != '' && filereadable(g:gitroot . '/GTAGS')
+        exe 'cs add ' . g:gitroot . '/GTAGS'
+    elseif filereadable("GTAGS")
+        cs add GTAGS
+        set nu
+    endif
+    set csverb
+endfunction
+autocmd BufRead *.c,*.cpp,*.h call GTAGS_add()
+" 映射 [[[2
+" 查找C语言符号, 即查找函数名、宏、枚举值等出现的地方
+nmap css :cs find s <C-R>=expand("<cword>")<CR><CR>
+" 查找函数、宏、枚举等定义的位置, 类似ctags所提供的功能
+nmap csg :cs find g <C-R>=expand("<cword>")<CR><CR>
+" 查找调用本函数的函数
+nmap csc :cs find c <C-R>=expand("<cword>")<CR><CR>
+" 查找指定的字符串
+nmap cst :cs find t <C-R>=expand("<cword>")<CR><CR>
+" 查找egrep模式, 相当于egrep功能, 但查找速度快多了
+nmap cse :cs find e <C-R>=expand("<cword>")<CR><CR>
+" 查找并打开文件, 类似vim的find功能
+nmap csf :cs find f <C-R>=expand("<cfile>")<CR><CR>
+" 查找包含本文件的文件
+nmap csi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+" 自己来输入命令
+nmap cs<Space> :cs find
+
 
 set fdm=marker
 " vim:fdm=marker:fmr={{{,}}}
@@ -379,10 +412,6 @@ autocmd FileType python call FT_python()
 " javascript
 autocmd FileType javascript call FT_JS()
 
-function! FT_JS()
-    nmap csn :lcd %:p:h<CR>:!js_cscope<CR>
-endfunction
-
 function! FT_xml()
     "inoremap </ </<c-x><c-o><Esc>a
     set cuc
@@ -413,7 +442,6 @@ function! FT_c()
             map <C-F9> :!time ./%<<CR>
         endif
     endif
-    nmap csn :lcd %:p:h<CR>:!c_cscope<CR>
     if g:gitroot != '' && filereadable(g:gitroot . '/.git/ycm_extra_conf.py')
         let g:ycm_global_ycm_extra_conf = g:gitroot . '/.git/ycm_extra_conf.py'
     else
@@ -438,7 +466,6 @@ function! FT_cpp()
             map <C-F9> :!time ./%<<CR>
         endif
     endif
-    nmap csn :lcd %:p:h<CR>:!cpp_cscope<CR>
     if g:gitroot != '' && filereadable(g:gitroot . '/.git/ycm_extra_conf.py')
         let g:ycm_global_ycm_extra_conf = g:gitroot . '/.git/ycm_extra_conf.py'
     else
@@ -456,7 +483,6 @@ function! FT_python()
     set cuc
     "Execute buffer with
     "map <F5> :w<CR>:!python %<CR>
-    nmap csn :lcd %:p:h<CR>:!python_cscope<CR>
     " Allow triple quotes in python
     let b:delimitMate_nesting_quotes = ['"', "'"]
     set tabstop=4

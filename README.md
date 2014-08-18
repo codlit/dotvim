@@ -2,7 +2,7 @@ My vim config files in MAC OSX!
 
 Installation:
 
-Firstly, make sure you have installed "Exuberant Ctags" and "cscope"
+Firstly, make sure you have installed "Exuberant Ctags" and "GNU GLOBAL"
 
 Nextly,execute following command in your term
 <pre><code>cd
