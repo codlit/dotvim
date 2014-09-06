@@ -128,8 +128,8 @@ map <leader>cd :cd %:p:h<CR>
 nmap <leader>u :UndotreeToggle<CR>
 
 " syntastic
-let g:syntastic_python_flake8_quiet_messages = { "regex": '\mE501' }  " line too long
-let g:syntastic_python_pep8_quiet_messages = { "regex": '\mE501' }  " line too long
+let g:syntastic_python_flake8_quiet_messages = { 'regex': '\m\E501\|E201\|E202' }
+
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 "let g:syntastic_quiet_warnings = 1
@@ -409,8 +409,6 @@ autocmd FileType cpp call FT_cpp()
 "编辑python
 let python_highlight_all = 1
 autocmd FileType python call FT_python()
-" javascript
-autocmd FileType javascript call FT_JS()
 
 function! FT_xml()
     "inoremap </ </<c-x><c-o><Esc>a
@@ -507,7 +505,7 @@ let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline#extensions#whitespace#enabled = 0
 
-""statusline
+""statusline  {{{
 "set statusline=
 "set statusline+=%7*\[%n]                                  "buffernr
 "set statusline+=%1*\ %<%F\                                "File+path
@@ -538,6 +536,7 @@ let g:airline#extensions#whitespace#enabled = 0
 "hi User9 ctermfg=White  ctermbg=Magenta
 "hi User0 guifg=#ffffff  guibg=#094afe
 "hi User0 ctermfg=Black  ctermbg=Grey
+" }}}
 
 
 "see  :help last-position-jump
