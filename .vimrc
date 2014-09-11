@@ -33,6 +33,7 @@ Plugin 'groenewege/vim-less'
 Plugin 'pangloss/vim-javascript'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'hdima/python-syntax'
+Bundle 'rizzatti/dash.vim'
 call vundle#end()
 filetype plugin indent on
 syntax on
