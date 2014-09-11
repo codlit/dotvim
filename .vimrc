@@ -552,3 +552,4 @@ augroup resCur
     autocmd!
     autocmd BufWinEnter * call ResCur()
 augroup END
+
