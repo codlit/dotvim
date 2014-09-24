@@ -6,7 +6,8 @@ call vundle#begin()
 "plugins that Vundle manages
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/syntastic'
-Plugin 'tomtom/tcomment_vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'scrooloose/nerdtree'
@@ -129,7 +130,9 @@ map <leader>cd :cd %:p:h<CR>
 nmap <leader>u :UndotreeToggle<CR>
 
 " syntastic
-let g:syntastic_python_flake8_quiet_messages = { 'regex': '\m\E501\|E201\|E202' }
+let g:syntastic_python_flake8_quiet_messages = { 'regex': '\m\'.
+            \'E201\|E202\|E228\|E231\|E265\|'.
+            \'E501' }
 
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
@@ -336,7 +339,7 @@ let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
 " let g:ycm_register_as_syntastic_checker = 0 "Don't use ycm for Syntastic
 let g:ycm_show_diagnostics_ui=0
-" let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
 nnoremap <leader>js :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>jg :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>jj :YcmCompleter GoToDefinitionElseDeclaration<CR>
@@ -505,6 +508,9 @@ let g:vim_markdown_initial_foldlevel=1
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline#extensions#whitespace#enabled = 0
+
+" vim-commentary
+autocmd FileType c,cpp set commentstring=//\ %s
 
 ""statusline  {{{
 "set statusline=
