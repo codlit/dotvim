@@ -6,11 +6,9 @@ call vundle#begin()
 "plugins that Vundle manages
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/syntastic'
-Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
-Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
 Plugin 'bling/vim-bufferline'
 Plugin 'airblade/vim-gitgutter'
@@ -19,12 +17,10 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'kien/ctrlp.vim'
-Plugin 'matchit.zip'
 Plugin 'mbbill/undotree'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'bling/vim-airline'
-Plugin 'terryma/vim-multiple-cursors'
 Plugin 'godlygeek/tabular'
 Plugin 'rking/ag.vim'
 Plugin 'Raimondi/delimitMate'
@@ -33,8 +29,7 @@ Plugin 'othree/html5.vim'
 Plugin 'groenewege/vim-less'
 Plugin 'pangloss/vim-javascript'
 Plugin 'jelera/vim-javascript-syntax'
-Plugin 'hdima/python-syntax'
-Bundle 'rizzatti/dash.vim'
+Plugin 'klen/python-mode'
 call vundle#end()
 filetype plugin indent on
 syntax on
@@ -131,7 +126,7 @@ nmap <leader>u :UndotreeToggle<CR>
 
 " syntastic
 let g:syntastic_python_flake8_quiet_messages = { 'regex': '\m\'.
-            \'E201\|E202\|E228\|E231\|E265\|'.
+            \'E201\|E202\|E222\|E228\|E231\|E265\|'.
             \'E501' }
 
 let g:syntastic_error_symbol = '✗'
@@ -304,23 +299,9 @@ nmap csi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 " 自己来输入命令
 nmap cs<Space> :cs find
 
-
 set fdm=marker
 " vim:fdm=marker:fmr={{{,}}}
 " vim:fdm=marker:fmr=[[[,]]]
-
-" NERD Tree
-let NERDChristmasTree=1
-"let NERDTreeAutoCenter=1
-"">>>>{path}
-"let   NERDTreeBookmarksFile=$VIM.'NerdBookmarks.txt'
-"let NERDTreeMouseMode=2
-let NERDTreeShowBookmarks=1
-"let NERDTreeShowFiles=1
-"let NERDTreeShowHidden=1
-"let NERDTreeShowLineNumbers=1
-let NERDTreeWinSize=31
-map <silent> <F3> :NERDTreeToggle<CR>
 
 " automatically open and close the popup menu / preview window
 "au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
@@ -489,6 +470,9 @@ function! FT_python()
     let b:delimitMate_nesting_quotes = ['"', "'"]
     set tabstop=4
 endfunction
+
+" python-mode
+let g:pymode_rope_complete_on_dot = 0  " solve conflict with YouCompleteMe
 
 " DoxygenToolkit
 let g:doxygen_enhanced_color=1
