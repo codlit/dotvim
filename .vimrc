@@ -3,7 +3,6 @@ filetype off
 "Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-"plugins that Vundle manages
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-commentary'
@@ -13,22 +12,19 @@ Plugin 'majutsushi/tagbar'
 Plugin 'bling/vim-bufferline'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
+Plugin 'gregsexton/gitv'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'kien/ctrlp.vim'
-Plugin 'mbbill/undotree'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'bling/vim-airline'
 Plugin 'godlygeek/tabular'
 Plugin 'rking/ag.vim'
 Plugin 'Raimondi/delimitMate'
-Plugin 'amirh/HTML-AutoCloseTag'
+Plugin 'HTML-AutoCloseTag'
 Plugin 'othree/html5.vim'
-Plugin 'groenewege/vim-less'
-Plugin 'pangloss/vim-javascript'
-Plugin 'jelera/vim-javascript-syntax'
 Plugin 'klen/python-mode'
 call vundle#end()
 filetype plugin indent on
@@ -121,13 +117,11 @@ nmap <Leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<C
 " When pressing <leader>cd switch to the directory of the open buffer
 map <leader>cd :cd %:p:h<CR>
 
-" undotree
-nmap <leader>u :UndotreeToggle<CR>
-
 " syntastic
 let g:syntastic_python_flake8_quiet_messages = { 'regex': '\m\'.
             \'E201\|E202\|E222\|E228\|E231\|E265\|'.
-            \'E501' }
+            \'E501\|'.
+            \'F403'}
 
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
@@ -167,18 +161,6 @@ let g:ctrlp_custom_ignore = {
             \ 'link': 'some_bad_symbolic_links',
             \ }
 
-"make the column where the cursor is highlighted or not
-nmap <leader>hc :call SetColorColumn()<CR>
-function! SetColorColumn()
-    let col_num = virtcol(".")
-    let cc_list = split(&cc, ',')
-    if count(cc_list, string(col_num)) <= 0
-        execute "set cc+=".col_num
-    else
-        execute "set cc-=".col_num
-    endif
-endfunction
-
 
 " tagbar
 let g:tagbar_sort = 0
@@ -202,6 +184,18 @@ let Tlist_Exit_OnlyWindow=1 "当taglist是最后一个分割窗口时, 自动推
 
 "set ut=2000     "2000ms更新, 可针对taglist
 
+
+"make the column where the cursor is highlighted or not
+nmap <leader>hc :call SetColorColumn()<CR>
+function! SetColorColumn()
+    let col_num = virtcol(".")
+    let cc_list = split(&cc, ',')
+    if count(cc_list, string(col_num)) <= 0
+        execute "set cc+=".col_num
+    else
+        execute "set cc-=".col_num
+    endif
+endfunction
 
 " Ctags
 "ctags omnicppcomplete
@@ -400,12 +394,6 @@ function! FT_xml()
     set cuc
 endfunction
 
-" html5.vim
-let g:html5_event_handler_attributes_complete = 0
-let g:html5_rdfa_attributes_complete = 0
-let g:html5_microdata_attributes_complete = 0
-let g:html5_aria_attributes_complete = 0
-
 function! FT_c()
     set cin
     "set makeprg=gcc\ -Wall\ -D__DEBUG__\ -o\ %<.exe\ %
@@ -473,15 +461,6 @@ endfunction
 
 " python-mode
 let g:pymode_rope_complete_on_dot = 0  " solve conflict with YouCompleteMe
-
-" DoxygenToolkit
-let g:doxygen_enhanced_color=1
-"let g:DoxygenToolkit_authorName="nemopwn"
-"let g:DoxygenToolkit_briefTag_funcName="yes"
-"let g:DoxygenToolkit_blockHeader="--------------------------------------------------------------------------"
-"let g:DoxygenToolkit_blockFooter="--------------------------------------------------------------------------"
-
-"au BufRead,BufNewFile *.md set filetype=markdown
 
 " plasticboy/vim-markdown
 let g:vim_markdown_folding_disabled=1
