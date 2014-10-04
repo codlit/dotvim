@@ -2,5 +2,6 @@
 *.py[cod]
 
 # vim
+.netrwhist
 .*.swp
 /bundle/

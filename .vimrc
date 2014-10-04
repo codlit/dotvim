@@ -118,17 +118,23 @@ nmap <Leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<C
 map <leader>cd :cd %:p:h<CR>
 
 " syntastic
-let g:syntastic_python_flake8_quiet_messages = { 'regex': '\m\'.
-            \'E201\|E202\|E222\|E228\|E231\|E265\|'.
-            \'E501\|'.
-            \'F403'}
-
+" using python-mode to check syntax
+" let g:syntastic_python_flake8_quiet_messages = { 'regex': '\m\'.
+"             \'E201\|E202\|E222\|E228\|E231\|E265\|'.
+"             \'E501\|'.
+"             \'F403'}
+let g:syntastic_mode_map = { "passive_filetypes": ["python"] }
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 "let g:syntastic_quiet_warnings = 1
 nmap <leader>s :SyntasticToggleMode<CR>
 " TODO: add nmap to toggle Errors window
 "nmap <leader>e xxx
+
+
+" python-mode
+let g:pymode_lint_ignore = "E201,E202,E222,E228,E231,E265,E501,F403"
+
 
 " vim-bufferline
 " let g:bufferline_echo = 0
