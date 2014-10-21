@@ -141,6 +141,9 @@ inoremap <C-a> <Esc>I
 " and ask which one to jump to
 nmap <Leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
+" rename word
+nmap gr :%s/\<<C-R>=expand("<cword>")<CR>\>//gc<left><left><left>
+
 " When pressing <leader>cd switch to the directory of the open buffer
 map <leader>cd :cd %:p:h<CR>
 
