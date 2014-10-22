@@ -34,6 +34,7 @@ import ycm_core
 # These are the compilation flags that will be used in case there's no
 # compilation database set (by default, one is not set).
 # CHANGE THIS LIST OF FLAGS. YES, THIS IS THE DROID YOU HAVE BEEN LOOKING FOR.
+include_dir = '/usr/local/Cellar/gcc/4.9.1/lib/gcc/x86_64-apple-darwin13.2.0/4.9.1/include/'
 flags = [
 '-Wall',
 '-Wextra',
@@ -59,11 +60,11 @@ flags = [
 # For a C project, you would set this to 'c' instead of 'c++'.
 '-x',
 'c',
-'-I',
-'.',
 #'-I',
 '-isystem',
-'/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/include'
+include_dir + 'ssp/',
+'-isystem',
+include_dir
 ]
 
 
