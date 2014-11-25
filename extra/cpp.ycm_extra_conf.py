@@ -34,7 +34,7 @@ import ycm_core
 # These are the compilation flags that will be used in case there's no
 # compilation database set (by default, one is not set).
 # CHANGE THIS LIST OF FLAGS. YES, THIS IS THE DROID YOU HAVE BEEN LOOKING FOR.
-include_dir = '/usr/local/Cellar/gcc/4.9.1/lib/gcc/x86_64-apple-darwin13.2.0/4.9.1/include/'
+include_dir = '/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/c++/4.2.1/'
 flags = [
 '-Wall',
 '-Wextra',
@@ -69,11 +69,7 @@ flags = [
 #'-isystem',
 #'../llvm/tools/clang/include',
 '-isystem',
-include_dir + 'ssp/',
-'-isystem',
-include_dir + 'c++/',
-'-isystem',
-include_dir,
+include_dir
 #'-I',
 #'./ClangCompleter',
 #'-isystem',

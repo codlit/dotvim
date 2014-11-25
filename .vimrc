@@ -88,7 +88,7 @@ let gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 
 "set guifont=Courier_New:h12:cANSI
 set guifont=Monaco:h12
 if has('gui_running')
-    set transparency=8
+    set transparency=18
     set lines=32 columns=95
 endif
 
