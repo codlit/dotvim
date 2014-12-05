@@ -60,8 +60,10 @@ set so=2 "当光标在窗口上下边界时距离边界2行即开始滚屏
 set go-=m  "不要菜单栏,工具栏(T),书签栏(B)
 set go-=T
 "set nowrap                      " Do not wrap long lines
+let &showbreak = '↳ '
+set cpo=n
 set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
-set synmaxcol=5000
+set synmaxcol=2000
 set scrolljump=-50              " Lines to scroll when cursor leaves screen
 set scrolloff=0                 " Minimum lines to keep above and below cursor
 set tabpagemax=15               " Only show 15 tabs
@@ -278,6 +280,7 @@ endfunction
 
 function! FT_python()
     set smartindent
+    setlocal wrap  " wrap ,when pymode is on
     if !has('python')
         let g:pymode = 0
     endif
@@ -306,9 +309,12 @@ nmap <leader>s :SyntasticToggleMode<CR>
 "nmap <leader>e xxx
 
 " python-mode
+" let g:pymode_rope = 0  # disable rope
 let g:pymode_rope_complete_on_dot = 0  " solve conflict with YouCompleteMe
+let g:pymode_options_colorcolumn = 0
 let g:pymode_lint_ignore = "W0401,"
-                         \."E201,E202,E222,E227,E228,E231,E265,E501"
+                         \."C901,"
+                         \."E201,E202,E222,E227,E228,E231,E265,E401,E501"
 
 " vim-bufferline
 " let g:bufferline_echo = 0

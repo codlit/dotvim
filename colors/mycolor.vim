@@ -7,6 +7,9 @@
 " by Hamish Stuart Macpherson
 "
 
+" Note: for 256-color terminal
+"
+
 hi clear
 
 if version > 580
@@ -115,28 +118,23 @@ hi VisualNOS                     guibg=#403D3D
 hi Visual                        guibg=#403D3D
 hi WarningMsg      guifg=#FFFFFF guibg=#333333 gui=bold
 hi WildMenu        guifg=#66D9EF guibg=#000000
-hi CursorLineNr    ctermfg=11    ctermbg=236
-hi CursorLineNr    guifg=Yellow  guibg=#293739
+hi CursorLineNr    ctermfg=11    ctermbg=241
+hi CursorLineNr    guifg=Yellow  guibg=#626262
+hi LineNr          ctermfg=250   ctermbg=234
+hi LineNr          guifg=#BCBCBC guibg=#1C1C1C
+hi CursorColumn                  ctermbg=238
+hi CursorColumn                  guibg=#444444
+hi NonText         ctermfg=13    ctermbg=234
+hi NonText         guifg=#ff00ff guibg=#232526
 
 if &background == "light"
    hi Normal          guifg=#F8F8F2 guibg=#272822
    hi Comment         guifg=#75715E
-   "hi CursorLine                    guibg=#3E3D32
-   hi CursorColumn                  guibg=#3E3D32
-   hi LineNr          guifg=#BCBCBC guibg=#3B3A32
-   hi NonText         guifg=#BCBCBC guibg=#3B3A32
 else
    hi Normal          guifg=#F8F8F2 guibg=#121212
    hi Comment         guifg=#5F5FAF
-   "hi CursorLine                    guibg=#293739
-   hi CursorColumn                  guibg=#293739
-   hi LineNr          guifg=#BCBCBC guibg=#262626
-   hi NonText         guifg=#BCBCBC guibg=#232526
 end
 
-"
-" Support for 256-color terminal
-"
 if &t_Co > 255
    hi Boolean         ctermfg=135
    hi Character       ctermfg=144
@@ -219,7 +217,4 @@ if &t_Co > 255
    "hi Normal          ctermfg=252 ctermbg=black
    hi Comment         ctermfg=61
    "hi Comment         ctermfg=239 guifg=#80a0ff
-   hi CursorColumn                ctermbg=235
-   hi LineNr          ctermfg=250 ctermbg=235
-   hi NonText         ctermfg=250 ctermbg=234
 end
