@@ -52,7 +52,6 @@ colorscheme mycolor
 set wildmenu      "下栏中显示<tab>预测项
 set ruler
 set nobackup
-set nu
 set laststatus=2
 set showcmd        "在状态栏显示目前输入的命令
 set backspace=indent,eol,start
@@ -60,8 +59,12 @@ set so=2 "当光标在窗口上下边界时距离边界2行即开始滚屏
 set go-=m  "不要菜单栏,工具栏(T),书签栏(B)
 set go-=T
 "set nowrap                      " Do not wrap long lines
-let &showbreak = '↳ '
-set cpo=n
+" set nu
+set relativenumber
+" let &showbreak = '↳  '
+set cpo+=n
+set showbreak=↳\ \ \ 
+
 set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
 set synmaxcol=2000
 set scrolljump=-50              " Lines to scroll when cursor leaves screen
@@ -167,7 +170,7 @@ function! UnMapFlow()
 endfunction
 command! MapFlow :call MapFlow()
 command! UnMapFlow :call UnMapFlow()
-call MapFlow()
+" call MapFlow()
 
 "make the column where the cursor is highlighted or not
 nmap <leader>hc :call SetColorColumn()<CR>
@@ -210,7 +213,6 @@ function! GTAGS_add()
         exe 'cs add ' . g:gitroot . '/GTAGS'
     elseif filereadable("GTAGS")
         cs add GTAGS
-        set nu
     endif
     set csverb
 endfunction
@@ -280,10 +282,17 @@ endfunction
 
 function! FT_python()
     set smartindent
-    setlocal wrap  " wrap ,when pymode is on
+    setlocal wrap  " wrap ,although pymode is on
     if !has('python')
         let g:pymode = 0
     endif
+    if g:gitroot != ''
+        let g:pymode_rope = 1
+        let g:pymode_rope_ropefolder = g:gitroot . '/.ropeproject'
+    else
+        let g:pymode_rope = 0  " disable rope
+    endif
+
     set foldmethod=indent
     set foldlevel=99
     set cuc
@@ -309,7 +318,6 @@ nmap <leader>s :SyntasticToggleMode<CR>
 "nmap <leader>e xxx
 
 " python-mode
-" let g:pymode_rope = 0  # disable rope
 let g:pymode_rope_complete_on_dot = 0  " solve conflict with YouCompleteMe
 let g:pymode_options_colorcolumn = 0
 let g:pymode_lint_ignore = "W0401,"
