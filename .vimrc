@@ -37,7 +37,7 @@ set smartcase        " Do smart case matching,只有搜索关键字中出现一�
 set hlsearch         "搜索高亮, 按下 gd 就有效果
 set incsearch        " Incremental search
 set autowrite        " Automatically save before commands like :next and :make
-"set hidden             " Hide buffers when they are abandoned
+"set hidden           " Hide buffers when they are abandoned
 set virtualedit=block
 set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
 "set mouse=nicr
@@ -381,8 +381,8 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
-" let g:ycm_register_as_syntastic_checker = 0 "Don't use ycm for Syntastic
-let g:ycm_show_diagnostics_ui=0
+" let g:ycm_register_as_syntastic_checker = 0  "Don't use ycm for Syntastic
+" let g:ycm_show_diagnostics_ui=0  "Don't use ycm's syntastic checker
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 nnoremap <leader>js :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>jg :YcmCompleter GoToDefinition<CR>
