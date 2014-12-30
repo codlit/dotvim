@@ -147,7 +147,7 @@ inoremap <C-a> <Esc>I
 nmap <Leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
 " rename word
-nmap gr :%s/\<<C-R>=expand("<cword>")<CR>\>//gc<left><left><left>
+nmap gr :%s/\C\<<C-R>=expand("<cword>")<CR>\>//gc<left><left><left>
 
 " When pressing <leader>cd switch to the directory of the open buffer
 map <leader>cd :cd %:p:h<CR>
@@ -389,7 +389,7 @@ nnoremap <leader>jg :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>jj :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
-" Tabularize
+" Tabular
 nmap <Leader>a& :Tabularize /&<CR>
 vmap <Leader>a& :Tabularize /&<CR>
 nmap <Leader>a= :Tabularize /=<CR>
