@@ -32,8 +32,8 @@ syntax on
 "set autoread
 set fileencodings=utf-8,gbk,ucs-bom,cp936
 set showmatch        " Show matching brackets.
-set ignorecase       "搜索时不区分大小写, 如果键入了大写字母则区分大小写
-set smartcase        " Do smart case matching,只有搜索关键字中出现一个大写字母时才区分大小写
+" set ignorecase       "搜索时不区分大小写, 如果键入了大写字母则区分大小写
+" set smartcase        " Do smart case matching, 只有搜索关键字中出现一个大写字母时才区分大小写
 set hlsearch         "搜索高亮, 按下 gd 就有效果
 set incsearch        " Incremental search
 set autowrite        " Automatically save before commands like :next and :make
@@ -47,7 +47,6 @@ if has('clipboard')
 endif
 set t_Co=256
 colorscheme mycolor
-" let g:solarized_termcolors = 256
 " colorscheme solarized
 set wildmenu      "下栏中显示<tab>预测项
 set ruler
@@ -87,7 +86,6 @@ set nojoinspaces    " Prevents inserting two spaces after punctuation on a join 
 set fdm=marker
 " vim:fdm=marker:fmr={{{,}}}
 " vim:fdm=marker:fmr=[[[,]]]
-let gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
 "set spell
 "set guifont=文泉驿等宽微米黑\ 12
 "set guifont=Courier_New:h12:cANSI
@@ -126,6 +124,9 @@ augroup resCur
     autocmd!
     autocmd BufWinEnter * call ResCur()
 augroup END
+
+" gitroot
+let gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
 
 "move around the windows
 map <c-j> <c-w>j
