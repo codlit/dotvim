@@ -202,7 +202,7 @@ map <leader>hex :call ToHexModle()<CR>
 set tags=./tags,~/.vimtags
 " Make tags placed in .git/tags file available in all levels of a repository
 if gitroot != ''
-    let &tags = &tags . ',' . gitroot . '/.git/tags'
+    let &tags = &tags . ',' . gitroot . '/tags'
 endif
 
 " GNU GLOBAL

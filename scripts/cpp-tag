@@ -1,6 +1,6 @@
 #!/bin/sh
 
-function createFilesList() {
+function CreateFilesList() {
     find $PWD -name "*.h" -o -name "*.cpp" -o -name "*.cc" > tags.files
 }
 
