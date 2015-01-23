@@ -26,6 +26,9 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'HTML-AutoCloseTag'
 Plugin 'othree/html5.vim'
 Plugin 'klen/python-mode'
+Plugin 'aftersyntaxc.vim'
+Plugin 'DoxygenToolkit.vim'
+Plugin 'a.vim'
 call vundle#end()
 filetype plugin indent on
 syntax on
@@ -417,36 +420,3 @@ autocmd FileType c,cpp set commentstring=//\ %s
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline#extensions#whitespace#enabled = 0
-
-""statusline  {{{
-"set statusline=
-"set statusline+=%7*\[%n]                                  "buffernr
-"set statusline+=%1*\ %<%F\                                "File+path
-"set statusline+=%2*%y                                     "FileType
-"set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
-"set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
-"set statusline+=%4*\ %{&ff}\                              "FileFormat (dos/unix..)
-""set statusline+=%5*\ %{&spelllang}\                       "Spellanguage
-"set statusline+=%5*%{fugitive#statusline()}               "fugitive#statusline
-"set statusline+=%8*\ %=row:%l/%L(%p%%)\                   "Rownumber/total (%)
-"set statusline+=%9*\ col:%02c\                            "Colnr
-"set statusline+=%0*\ %m%r%w\ %P\                          "Modified? Readonly? Top/bot.
-"hi User1 guifg=#ffdad8  guibg=#880c0e
-"hi User1 ctermfg=White  ctermbg=DarkRed
-"hi User2 guifg=#000000  guibg=#F4905C
-"hi User2 ctermfg=Black  ctermbg=DarkYellow
-"hi User3 guifg=#292b00  guibg=#f4f597
-"hi User3 ctermfg=Black  ctermbg=LightYellow
-"hi User4 guifg=#112605  guibg=#aefe7B
-"hi User4 ctermfg=Black  ctermbg=LightGreen
-"hi User5 guifg=#051d00  guibg=#7dcc7d
-"hi User5 ctermfg=Black  ctermbg=Green
-"hi User7 guifg=#ffffff  guibg=#880c0e   gui=bold
-"hi User7 ctermfg=White  ctermbg=DarkRed cterm=bold
-"hi User8 guifg=#ffffff  guibg=#5b7fbb
-"hi User8 ctermfg=White  ctermbg=27
-"hi User9 guifg=#ffffff  guibg=#810085
-"hi User9 ctermfg=White  ctermbg=Magenta
-"hi User0 guifg=#ffffff  guibg=#094afe
-"hi User0 ctermfg=Black  ctermbg=Grey
-" }}}
