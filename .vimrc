@@ -26,7 +26,6 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'HTML-AutoCloseTag'
 Plugin 'othree/html5.vim'
 Plugin 'klen/python-mode'
-Plugin 'aftersyntaxc.vim'
 Plugin 'DoxygenToolkit.vim'
 Plugin 'a.vim'
 call vundle#end()
@@ -114,7 +113,6 @@ highlight PmenuSel guibg=lightgrey guifg=black
 highlight Pmenu    ctermbg=246     ctermfg=234
 highlight PmenuSel ctermbg=7       ctermfg=0
 
-
 "see  :help last-position-jump
 " comment it, because when open .js it can't support syntax, so you should type  g'"  to go previous position
 function! ResCur()
@@ -145,6 +143,28 @@ nmap <Space> i<Space><Esc>l
 inoremap jj <ESC>
 inoremap <C-e> <Esc>A
 inoremap <C-a> <Esc>I
+
+" Don't close window, when deleting a buffer
+nmap <leader>q :Bclose<cr>
+command! Bclose call <SID>BufcloseCloseIt()
+function! <SID>BufcloseCloseIt()
+   let l:currentBufNum = bufnr("%")
+   let l:alternateBufNum = bufnr("#")
+
+   if buflisted(l:alternateBufNum)
+     buffer #
+   else
+     bnext
+   endif
+
+   if bufnr("%") == l:currentBufNum
+     new
+   endif
+
+   if buflisted(l:currentBufNum)
+     execute("bdelete ".l:currentBufNum)
+   endif
+endfunction
 
 " Map <Leader>ff to display all lines with keyword under cursor
 " and ask which one to jump to
@@ -348,8 +368,8 @@ let g:UltiSnipsJumpForwardTrigger="<C-f>"
 let g:UltiSnipsJumpBackwardTrigger="<C-b>"
 
 " CtrlP
-nmap <leader>b :CtrlPBuffer<CR>
 nmap <leader>t :CtrlP<CR>
+nmap <leader>b :CtrlPBuffer<CR>
 nmap <leader>T :CtrlPClearCache<CR>:CtrlP<CR>
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
