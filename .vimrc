@@ -148,22 +148,19 @@ inoremap <C-a> <Esc>I
 nmap <leader>q :Bclose<cr>
 command! Bclose call <SID>BufcloseCloseIt()
 function! <SID>BufcloseCloseIt()
-   let l:currentBufNum = bufnr("%")
-   let l:alternateBufNum = bufnr("#")
-
-   if buflisted(l:alternateBufNum)
-     buffer #
-   else
-     bnext
-   endif
-
-   if bufnr("%") == l:currentBufNum
-     new
-   endif
-
-   if buflisted(l:currentBufNum)
-     execute("bdelete ".l:currentBufNum)
-   endif
+    let l:currentBufNum = bufnr("%")
+    let l:alternateBufNum = bufnr("#")
+    if buflisted(l:alternateBufNum)
+        buffer #
+    else
+        bnext
+    endif
+    if bufnr("%") == l:currentBufNum
+        new
+    endif
+    if buflisted(l:currentBufNum)
+        execute("bdelete ".l:currentBufNum)
+    endif
 endfunction
 
 " Map <Leader>ff to display all lines with keyword under cursor
@@ -404,9 +401,10 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
 " let g:ycm_register_as_syntastic_checker = 0  "Don't use ycm for Syntastic
 " let g:ycm_show_diagnostics_ui=0  "Don't use ycm's syntastic checker
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_always_populate_location_list = 1 "default 0
 nnoremap <leader>js :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>jg :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>jj :YcmCompleter GoToDefinitionElseDeclaration<CR>
