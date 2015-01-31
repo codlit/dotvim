@@ -27,6 +27,7 @@ Plugin 'HTML-AutoCloseTag'
 Plugin 'othree/html5.vim'
 Plugin 'klen/python-mode'
 Plugin 'DoxygenToolkit.vim'
+Plugin 'wannesm/wmgraphviz.vim'
 call vundle#end()
 filetype plugin indent on
 syntax on
@@ -144,7 +145,7 @@ inoremap <C-e> <Esc>A
 inoremap <C-a> <Esc>I
 
 " Don't close window, when deleting a buffer
-nmap <leader>q :Bclose<cr>
+nmap <leader>d :Bclose<cr>
 command! Bclose call <SID>BufcloseCloseIt()
 function! <SID>BufcloseCloseIt()
     let l:currentBufNum = bufnr("%")
@@ -396,12 +397,13 @@ let Tlist_Exit_OnlyWindow=1 "当taglist是最后一个分割窗口时, 自动推
 "set ut=2000     "2000ms更新, 可针对taglist
 
 " YouCompleteMe
+let g:ycm_key_detailed_diagnostics = ''
+let g:ycm_key_invoke_completion = '<C-k>'
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
-" let g:ycm_register_as_syntastic_checker = 0  "Don't use ycm for Syntastic
 " let g:ycm_show_diagnostics_ui=0  "Don't use ycm's syntastic checker
 let g:ycm_always_populate_location_list = 1 "default 0
 nnoremap <leader>js :YcmCompleter GoToDeclaration<CR>
