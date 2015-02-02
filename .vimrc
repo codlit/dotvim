@@ -135,7 +135,7 @@ map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 
-"Set mapleader
+" Set mapleader
 let mapleader = ","
 let g:mapleader = ","
 
@@ -144,24 +144,29 @@ inoremap jj <ESC>
 inoremap <C-e> <Esc>A
 inoremap <C-a> <Esc>I
 
-" Don't close window, when deleting a buffer
-nmap <leader>d :Bclose<cr>
-command! Bclose call <SID>BufcloseCloseIt()
-function! <SID>BufcloseCloseIt()
-    let l:currentBufNum = bufnr("%")
-    let l:alternateBufNum = bufnr("#")
-    if buflisted(l:alternateBufNum)
-        buffer #
-    else
-        bnext
-    endif
-    if bufnr("%") == l:currentBufNum
-        new
-    endif
-    if buflisted(l:currentBufNum)
-        execute("bdelete ".l:currentBufNum)
-    endif
-endfunction
+" location list
+nmap <leader>lo :lopen<CR>
+nmap <leader>lc :lclose<CR>
+
+nmap <leader>d :bdelete %<CR>
+" " Don't close window, when deleting a buffer
+" nmap <leader>d :Bclose<CR>
+" command! Bclose call <SID>BufcloseCloseIt()
+" function! <SID>BufcloseCloseIt()
+"     let l:currentBufNum = bufnr("%")
+"     let l:alternateBufNum = bufnr("#")
+"     if buflisted(l:alternateBufNum)
+"         buffer #
+"     else
+"         bnext
+"     endif
+"     if bufnr("%") == l:currentBufNum
+"         new
+"     endif
+"     if buflisted(l:currentBufNum)
+"         execute("bdelete ".l:currentBufNum)
+"     endif
+" endfunction
 
 " Map <Leader>ff to display all lines with keyword under cursor
 " and ask which one to jump to
