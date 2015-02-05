@@ -148,25 +148,26 @@ inoremap <C-a> <Esc>I
 nmap <leader>lo :lopen<CR>
 nmap <leader>lc :lclose<CR>
 
-nmap <leader>d :bdelete %<CR>
+nmap <leader>dc :bdelete %<CR>
+nmap <leader>dp :bdelete #<CR>
 " " Don't close window, when deleting a buffer
-" nmap <leader>d :Bclose<CR>
-" command! Bclose call <SID>BufcloseCloseIt()
-" function! <SID>BufcloseCloseIt()
-"     let l:currentBufNum = bufnr("%")
-"     let l:alternateBufNum = bufnr("#")
-"     if buflisted(l:alternateBufNum)
-"         buffer #
-"     else
-"         bnext
-"     endif
-"     if bufnr("%") == l:currentBufNum
-"         new
-"     endif
-"     if buflisted(l:currentBufNum)
-"         execute("bdelete ".l:currentBufNum)
-"     endif
-" endfunction
+nmap <leader>dd :Bclose<CR>
+command! Bclose call <SID>BufcloseCloseIt()
+function! <SID>BufcloseCloseIt()
+    let l:currentBufNum = bufnr("%")
+    let l:alternateBufNum = bufnr("#")
+    if buflisted(l:alternateBufNum)
+        buffer #
+    else
+        bnext
+    endif
+    if bufnr("%") == l:currentBufNum
+        new
+    endif
+    if buflisted(l:currentBufNum)
+        execute("bdelete ".l:currentBufNum)
+    endif
+endfunction
 
 " Map <Leader>ff to display all lines with keyword under cursor
 " and ask which one to jump to
