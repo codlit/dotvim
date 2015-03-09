@@ -27,7 +27,6 @@ Plugin 'HTML-AutoCloseTag'
 Plugin 'othree/html5.vim'
 Plugin 'klen/python-mode'
 Plugin 'DoxygenToolkit.vim'
-" Plugin 'wannesm/wmgraphviz.vim'
 call vundle#end()
 filetype plugin indent on
 syntax on
