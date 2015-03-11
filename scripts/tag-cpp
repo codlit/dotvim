@@ -1,26 +1,26 @@
 #!/bin/sh
 
 function CreateFilesList() {
-    find $PWD -name "*.h" -o -name "*.cpp" -o -name "*.cc" > tags.files
+    find $PWD -name "*.h" -o -name "*.cpp" -o -name "*.cc" > gtags.files
 }
 
 function CreateGtags() {
-    gtags -f tags.files
+    gtags -f gtags.files
 }
 
 function createCscope() {
-    cscope -Rbq -i tags.files
+    cscope -Rbq -i gtags.files
 }
 
 function createTags() {
-    ctags -R --languages=c++ --c++-kinds=+px --fields=+iaS --extra=+q -L tags.files
+    ctags -R --languages=c++ --c++-kinds=+px --fields=+iaS --extra=+q -L gtags.files
 }
 
 function Usage() {
     fn=`basename $0`
     echo "Usage: $fn [hfct]"
     echo "  h    help information"
-    echo "  f    find target files to tags.files"
+    echo "  f    find target files to gtags.files"
     echo "  g    gtags"
     # echo "  c    create cscope symbol files"
     echo "  t    ctags"

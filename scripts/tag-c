@@ -2,15 +2,15 @@
 
 
 function CreateFilesList() {
-    find $PWD -name "*.h" -o -name "*.c" -o -name "*.cc" > tags.files
+    find $PWD -name "*.h" -o -name "*.c" -o -name "*.cc" > gtags.files
 }
 
 function CreateGtags() {
-    gtags -f tags.files
+    gtags -f gtags.files
 }
 
 function CreateCscope() {
-    cscope -Rbq -i tags.files
+    cscope -Rbq -i gtags.files
 }
 
 # Ctags
@@ -22,14 +22,14 @@ function CreateCscope() {
 # --fields=+iaS    " 在标签文件中加入继承信息(i)、类成员的访问控制信息(a)、以及函数的指纹(S)
 # --extra=+q       " 为标签增加类修饰符。注意, 如果没有此选项, 将不能对类成员补全
 function CreateTags() {
-    ctags -R --languages=c --langmap=c:+.h -h +.h --c-kinds=+px --fields=+iaS --extra=+q -L tags.files
+    ctags -R --languages=c --langmap=c:+.h -h +.h --c-kinds=+px --fields=+iaS --extra=+q -L gtags.files
 }
 
 function Usage() {
     fn=`basename $0`
     echo "Usage: $fn [hfct]"
     echo "  h    help information"
-    echo "  f    find target files to tags.files"
+    echo "  f    find target files to gtags.files"
     echo "  g    gtags"
     # echo "  c    create cscope symbol files"
     echo "  t    ctags"
