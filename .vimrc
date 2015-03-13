@@ -291,7 +291,7 @@ function! FT_c()
     if g:gitroot != '' && filereadable(g:gitroot . '/.ycm_extra_conf.py')
         let g:ycm_global_ycm_extra_conf = g:gitroot . '/.ycm_extra_conf.py'
     else
-        let g:ycm_global_ycm_extra_conf = '~/.vim/extra/c.ycm_extra_conf.py'
+        let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf/c.ycm_extra_conf.py'
     endif
 endfunction
 
@@ -301,7 +301,7 @@ function! FT_cpp()
     if g:gitroot != '' && filereadable(g:gitroot . '/.ycm_extra_conf.py')
         let g:ycm_global_ycm_extra_conf = g:gitroot . '/.ycm_extra_conf.py'
     else
-        let g:ycm_global_ycm_extra_conf = '~/.vim/extra/cpp.ycm_extra_conf.py'
+        let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf/cpp.ycm_extra_conf.py'
     endif
 endfunction
 

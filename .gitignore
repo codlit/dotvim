@@ -5,3 +5,4 @@
 .netrwhist
 .*.swp
 /bundle/
+/ycm_extra_conf/
