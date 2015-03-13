@@ -41,8 +41,8 @@ set autowrite        " Automatically save before commands like :next and :make
 "set hidden           " Hide buffers when they are abandoned
 set virtualedit=block
 set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
-"set mouse=nicr
-set mouse=a        " Enable mouse usage (all modes)
+set mouse=nicr
+" set mouse=a        " Enable mouse usage (all modes)
 if has('clipboard')
     set clipboard=unnamed
 endif
