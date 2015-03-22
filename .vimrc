@@ -347,7 +347,7 @@ let g:pymode_rope_complete_on_dot = 0  " solve conflict with YouCompleteMe
 let g:pymode_options_colorcolumn = 0
 let g:pymode_lint_ignore = "W0401,"
                          \."C901,"
-                         \."E201,E202,E222,E227,E228,E231,E265,E401,E501"
+                         \."E201,E202,E222,E227,E228,E231,E265,E302,E401,E501"
 
 " vim-bufferline
 " let g:bufferline_echo = 0
