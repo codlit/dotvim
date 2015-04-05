@@ -85,8 +85,6 @@ set expandtab       "tab用空格表示
 set softtabstop=4   "backspace一次消除4个空格
 set nojoinspaces    " Prevents inserting two spaces after punctuation on a join (J)
 set fdm=marker
-" vim:fdm=marker:fmr={{{,}}}
-" vim:fdm=marker:fmr=[[[,]]]
 "set spell
 "set guifont=文泉驿等宽微米黑\ 12
 "set guifont=Courier_New:h12:cANSI
@@ -147,6 +145,7 @@ inoremap <C-a> <Esc>I
 nmap <leader>lo :lopen<CR>
 nmap <leader>lc :lclose<CR>
 
+nmap <leader>lb :buffers<CR>
 nmap <leader>dc :bdelete %<CR>
 nmap <leader>dp :bdelete #<CR>
 " " Don't close window, when deleting a buffer
@@ -440,7 +439,7 @@ let g:vim_markdown_initial_foldlevel=1
 autocmd FileType c,cpp set commentstring=//\ %s
 
 " airline
-" let g:airline_theme='base16'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#bufferline#enabled = 0
