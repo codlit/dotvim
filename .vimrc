@@ -124,7 +124,7 @@ augroup resCur
 augroup END
 
 " gitroot
-let gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
+let g:gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
 
 "move around the windows
 map <c-j> <c-w>j
@@ -224,8 +224,8 @@ map <leader>hex :call ToHexModle()<CR>
 
 " Ctags
 " Make tags placed in .git/tags file available in all levels of a repository
-if gitroot != ''
-    let &tags = &tags . ',' . gitroot . '/tags'
+if g:gitroot != ''
+    let &tags = &tags . ',' . g:gitroot . '/tags'
 endif
 
 " GNU GLOBAL
@@ -386,22 +386,8 @@ let g:tagbar_width = 30
 let g:tagbar_ctags_bin = 'ctags'
 let g:tagbar_type_javascript = { 'ctagsbin' : '/usr/local/bin/jsctags' }
 
-"进行Tlist的设置,放到有中文的目录里无法生成
-"命令:TlistUpdate可以更新tags
-map <silent> <S-F4> :Tlist<CR>
-let Tlist_Ctags_Cmd='ctags' "因为我们放在环境变量里, 所以可以直接执行
-"let Tlist_Use_Right_Window=1 "让窗口显示在右边, 0的话就是显示在左边
-"let Tlist_Show_One_File=0
-""让taglist可以同时展示多个文件的函数列表, 如果想只有1个, 设置为1
-let Tlist_File_Fold_Auto_Close=1 "非当前文件, 函数列表折叠隐藏
-let Tlist_Exit_OnlyWindow=1 "当taglist是最后一个分割窗口时, 自动推出vim
-"是否一直处理tags.1:处理;0:不处理
-"let Tlist_Process_File_Always=0 "不是一直实时更新tags, 因为没有必要
-"let Tlist_Inc_Winwidth=0
-"set ut=2000     "2000ms更新, 可针对taglist
-
 " YouCompleteMe
-let g:ycm_key_detailed_diagnostics = ''
+let g:ycm_key_detailed_diagnostics = '<leader>yd'
 let g:ycm_key_invoke_completion = '<C-k>'
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_confirm_extra_conf = 0
