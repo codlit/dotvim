@@ -75,8 +75,9 @@ set list
 set listchars=tab:\ \ ,trail:•,extends:#,nbsp:.  " Highlight problematic whitespace
 " set listchars=tab:»\ ,trail:•,extends:#,nbsp:.  " Highlight problematic whitespace
 " set listchars=tab:»·,trail:•,extends:#,nbsp:.  " Highlight problematic whitespace
-"set autoindent
-set smartindent
+set pastetoggle=<F12>
+set autoindent
+" set smartindent
 "第一行, vim使用自动对起, 也就是把当前行的对起格式应用到下一行；
 "第二行, 依据上面的对起格式, 智能的选择对起方式, 对于类似C语言编写上很有用
 set tabstop=4
@@ -134,10 +135,8 @@ map <c-h> <c-w>h
 
 " Set mapleader
 let mapleader = ","
-let g:mapleader = ","
 
 nmap <Space> i<Space><Esc>l
-inoremap jj <ESC>
 inoremap <C-e> <Esc>A
 inoremap <C-a> <Esc>I
 
@@ -384,7 +383,6 @@ let g:tagbar_sort = 0
 nmap <silent> <F4> :TagbarToggle<CR>
 let g:tagbar_width = 30
 let g:tagbar_ctags_bin = 'ctags'
-let g:tagbar_type_javascript = { 'ctagsbin' : '/usr/local/bin/jsctags' }
 
 " YouCompleteMe
 let g:ycm_key_detailed_diagnostics = '<leader>yd'
