@@ -1,22 +1,22 @@
 #!/bin/sh
 
-function CreateFilesList() {
+CreateFilesList() {
     find $PWD -name "*.h" -o -name "*.cpp" -o -name "*.cc" > gtags.files
 }
 
-function CreateGtags() {
+CreateGtags() {
     gtags -f gtags.files
 }
 
-function createCscope() {
+createCscope() {
     cscope -Rbq -i gtags.files
 }
 
-function createTags() {
+createTags() {
     ctags -R --languages=c++ --c++-kinds=+px --fields=+iaS --extra=+q -L gtags.files
 }
 
-function Usage() {
+Usage() {
     fn=`basename $0`
     echo "Usage: $fn [hfct]"
     echo "  h    help information"
