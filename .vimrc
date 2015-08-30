@@ -23,8 +23,6 @@ Plugin 'bling/vim-airline'
 Plugin 'godlygeek/tabular'
 Plugin 'rking/ag.vim'
 Plugin 'Raimondi/delimitMate'
-Plugin 'HTML-AutoCloseTag'
-Plugin 'othree/html5.vim'
 Plugin 'klen/python-mode'
 Plugin 'DoxygenToolkit.vim'
 call vundle#end()
