@@ -283,6 +283,7 @@ endfunction
 
 function! FT_c()
     set cin
+    set cinoptions=:0
     "set makeprg=gcc\ -Wall\ -D__DEBUG__\ -o\ %<.exe\ %
     if g:gitroot != '' && filereadable(g:gitroot . '/.ycm_extra_conf.py')
         let g:ycm_global_ycm_extra_conf = g:gitroot . '/.ycm_extra_conf.py'
@@ -293,6 +294,7 @@ endfunction
 
 function! FT_cpp()
     set cin
+    set cinoptions=:0g0
     "set makeprg=g++\ -Wall\ -D__DEBUG__\ -o\ %<.exe\ %
     if g:gitroot != '' && filereadable(g:gitroot . '/.ycm_extra_conf.py')
         let g:ycm_global_ycm_extra_conf = g:gitroot . '/.ycm_extra_conf.py'
