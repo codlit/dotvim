@@ -39,8 +39,8 @@ set autowrite        " Automatically save before commands like :next and :make
 "set hidden           " Hide buffers when they are abandoned
 set virtualedit=block
 set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
-set mouse=nicr
-" set mouse=a        " Enable mouse usage (all modes)
+" set mouse=nicr
+set mouse=a        " Enable mouse usage (all modes)
 if has('clipboard')
     set clipboard=unnamed
 endif
@@ -122,8 +122,12 @@ augroup resCur
     autocmd BufWinEnter * call ResCur()
 augroup END
 
-" gitroot
-let g:gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
+" coderoot
+let g:coderoot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
+if g:coderoot == ''
+    let g:coderoot = substitute(system('hg root'), '[\n\r]', '', 'g')
+endif
+
 
 "move around the windows
 map <c-j> <c-w>j
@@ -220,9 +224,9 @@ endfunction
 map <leader>hex :call ToHexModle()<CR>
 
 " Ctags
-" Make tags placed in .git/tags file available in all levels of a repository
-if g:gitroot != ''
-    let &tags = &tags . ',' . g:gitroot . '/tags'
+" Make tags placed in tags file available in all levels of a repository
+if g:coderoot != ''
+    let &tags = &tags . ',' . g:coderoot . '/tags'
 endif
 
 " GNU GLOBAL
@@ -230,8 +234,8 @@ set cscopeprg=gtags-cscope
 " add any database in current directory
 function! GTAGS_add()
     set nocsverb
-    if g:gitroot != '' && filereadable(g:gitroot . '/GTAGS')
-        exe 'cs add ' . g:gitroot . '/GTAGS'
+    if g:coderoot != '' && filereadable(g:coderoot . '/GTAGS')
+        exe 'cs add ' . g:coderoot . '/GTAGS'
     elseif filereadable("GTAGS")
         cs add GTAGS
     endif
@@ -285,8 +289,8 @@ function! FT_c()
     set cin
     set cinoptions=:0
     "set makeprg=gcc\ -Wall\ -D__DEBUG__\ -o\ %<.exe\ %
-    if g:gitroot != '' && filereadable(g:gitroot . '/.ycm_extra_conf.py')
-        let g:ycm_global_ycm_extra_conf = g:gitroot . '/.ycm_extra_conf.py'
+    if g:coderoot != '' && filereadable(g:coderoot . '/.ycm_extra_conf.py')
+        let g:ycm_global_ycm_extra_conf = g:coderoot . '/.ycm_extra_conf.py'
     else
         let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf/c.ycm_extra_conf.py'
     endif
@@ -296,8 +300,8 @@ function! FT_cpp()
     set cin
     set cinoptions=:0,g0
     "set makeprg=g++\ -Wall\ -D__DEBUG__\ -o\ %<.exe\ %
-    if g:gitroot != '' && filereadable(g:gitroot . '/.ycm_extra_conf.py')
-        let g:ycm_global_ycm_extra_conf = g:gitroot . '/.ycm_extra_conf.py'
+    if g:coderoot != '' && filereadable(g:coderoot . '/.ycm_extra_conf.py')
+        let g:ycm_global_ycm_extra_conf = g:coderoot . '/.ycm_extra_conf.py'
     else
         let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf/cpp.ycm_extra_conf.py'
     endif
@@ -309,9 +313,9 @@ function! FT_python()
     if !has('python')
         let g:pymode = 0
     endif
-    if g:gitroot != ''
+    if g:coderoot != ''
         let g:pymode_rope = 1
-        let g:pymode_rope_ropefolder = g:gitroot . '/.ropeproject'
+        let g:pymode_rope_ropefolder = g:coderoot . '/.ropeproject'
     else
         let g:pymode_rope = 0  " disable rope
     endif
