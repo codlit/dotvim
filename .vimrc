@@ -142,10 +142,7 @@ nmap <Space> i<Space><Esc>l
 inoremap <C-e> <Esc>A
 inoremap <C-a> <Esc>I
 
-" location list
-nmap <leader>lo :lopen<CR>
-nmap <leader>lc :lclose<CR>
-
+" Buffer
 nmap <leader>lb :buffers<CR>
 nmap <leader>dc :bdelete %<CR>
 nmap <leader>dp :bdelete #<CR>
@@ -168,9 +165,23 @@ function! <SID>BufcloseCloseIt()
     endif
 endfunction
 
-" Map <Leader>ff to display all lines with keyword under cursor
+" location list
+function! s:BufferCount()
+    return len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
+endfunction
+function! s:LListToggle()
+    let buffer_count_before = s:BufferCount()
+    silent! lclose
+
+    if s:BufferCount() == buffer_count_before
+        execute "silent! lopen"
+    endif
+endfunction
+nmap <leader>ll :call <SID>LListToggle()<CR>
+
+" Map <leader>ff to display all lines with keyword under cursor
 " and ask which one to jump to
-nmap <Leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
+nmap <leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
 " rename word
 nmap gr :%s/\C\<<C-R>=expand("<cword>")<CR>\>//gc<left><left><left>
@@ -339,10 +350,11 @@ endfunction
 let g:syntastic_mode_map = { "passive_filetypes": ["python"] }
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_quiet_warnings = 1
 nmap <leader>s :SyntasticToggleMode<CR>
-" TODO: add nmap to toggle Errors window
-"nmap <leader>e xxx
+" cpp
+let g:syntastic_cpp_compiler_options = "-std=c++11 -stdlib=libc++"
 
 " python-mode
 let g:pymode_rope_complete_on_dot = 0  " solve conflict with YouCompleteMe
@@ -396,7 +408,7 @@ let g:ycm_confirm_extra_conf = 0
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
-" let g:ycm_show_diagnostics_ui=0  "Don't use ycm's syntastic checker
+let g:ycm_show_diagnostics_ui=0  "Don't use ycm's syntastic checker
 let g:ycm_always_populate_location_list = 1 "default 0
 nnoremap <leader>js :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>jg :YcmCompleter GoToDefinition<CR>
@@ -404,20 +416,20 @@ nnoremap <leader>jj :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
 " Tabular
-nmap <Leader>a& :Tabularize /&<CR>
-vmap <Leader>a& :Tabularize /&<CR>
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:<CR>
-vmap <Leader>a: :Tabularize /:<CR>
-nmap <Leader>a:: :Tabularize /:\zs<CR>
-vmap <Leader>a:: :Tabularize /:\zs<CR>
-nmap <Leader>a, :Tabularize /,<CR>
-vmap <Leader>a, :Tabularize /,<CR>
-nmap <Leader>a,, :Tabularize /,\zs<CR>
-vmap <Leader>a,, :Tabularize /,\zs<CR>
-nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+nmap <leader>a& :Tabularize /&<CR>
+vmap <leader>a& :Tabularize /&<CR>
+nmap <leader>a= :Tabularize /=<CR>
+vmap <leader>a= :Tabularize /=<CR>
+nmap <leader>a: :Tabularize /:<CR>
+vmap <leader>a: :Tabularize /:<CR>
+nmap <leader>a:: :Tabularize /:\zs<CR>
+vmap <leader>a:: :Tabularize /:\zs<CR>
+nmap <leader>a, :Tabularize /,<CR>
+vmap <leader>a, :Tabularize /,<CR>
+nmap <leader>a,, :Tabularize /,\zs<CR>
+vmap <leader>a,, :Tabularize /,\zs<CR>
+nmap <leader>a<Bar> :Tabularize /<Bar><CR>
+vmap <leader>a<Bar> :Tabularize /<Bar><CR>
 
 " plasticboy/vim-markdown
 let g:vim_markdown_folding_disabled=1
