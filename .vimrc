@@ -26,6 +26,7 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'klen/python-mode'
 Plugin 'DoxygenToolkit.vim'
 call vundle#end()
+
 filetype plugin indent on
 syntax on
 "set autoread
