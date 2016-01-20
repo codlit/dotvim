@@ -342,6 +342,24 @@ endfunction
 
 
 " ---------- Plugins ----------
+" YouCompleteMe
+let g:ycm_key_detailed_diagnostics = '<leader>yd'
+let g:ycm_key_invoke_completion = '<C-k>'
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_show_diagnostics_ui=0  "Don't use ycm's syntastic checker
+let g:ycm_always_populate_location_list = 1 "default 0
+nnoremap <leader>js :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>jg :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>jj :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
+function! s:YCM_syntastic_toggle()
+    let g:ycm_show_diagnostics_ui = xor(g:ycm_show_diagnostics_ui, 1)
+endfunction
+
 " syntastic
 " using python-mode to check syntax
 " let g:syntastic_python_flake8_quiet_messages = { 'regex': '\m\'.
@@ -354,8 +372,10 @@ let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_quiet_warnings = 1
 nmap <leader>s :SyntasticToggleMode<CR>
+autocmd FileType c,cpp,objc,objcpp nmap <leader>s :call <SID>YCM_syntastic_toggle()<CR>
 " cpp
-let g:syntastic_cpp_compiler_options = "-std=c++11 -stdlib=libc++"
+let g:syntastic_cpp_checkers = []
+let g:syntastic_cpp_compiler_options = " -std=c++11 -stdlib=libc++"
 
 " python-mode
 let g:pymode_rope_complete_on_dot = 0  " solve conflict with YouCompleteMe
@@ -400,21 +420,6 @@ let g:tagbar_sort = 0
 nmap <silent> <F4> :TagbarToggle<CR>
 let g:tagbar_width = 30
 let g:tagbar_ctags_bin = 'ctags'
-
-" YouCompleteMe
-let g:ycm_key_detailed_diagnostics = '<leader>yd'
-let g:ycm_key_invoke_completion = '<C-k>'
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_complete_in_comments = 1
-let g:ycm_complete_in_strings = 1
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_show_diagnostics_ui=0  "Don't use ycm's syntastic checker
-let g:ycm_always_populate_location_list = 1 "default 0
-nnoremap <leader>js :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>jg :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>jj :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
 " Tabular
 nmap <leader>a& :Tabularize /&<CR>
