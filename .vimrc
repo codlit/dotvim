@@ -23,6 +23,7 @@ Plugin 'bling/vim-airline'
 Plugin 'godlygeek/tabular'
 Plugin 'rking/ag.vim'
 Plugin 'Raimondi/delimitMate'
+Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'klen/python-mode'
 Plugin 'DoxygenToolkit.vim'
 call vundle#end()
