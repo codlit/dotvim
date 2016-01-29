@@ -4,7 +4,6 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
-Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
@@ -19,7 +18,7 @@ Plugin 'honza/vim-snippets'
 Plugin 'kien/ctrlp.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
 Plugin 'godlygeek/tabular'
 Plugin 'rking/ag.vim'
 Plugin 'Raimondi/delimitMate'
@@ -350,32 +349,17 @@ let g:ycm_confirm_extra_conf = 0
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_show_diagnostics_ui=0  "Don't use ycm's syntastic checker
+let g:ycm_show_diagnostics_ui = 0  "Don't use ycm's syntax checker
 let g:ycm_always_populate_location_list = 1 "default 0
 nnoremap <leader>js :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>jg :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>jj :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
-function! s:YCM_syntastic_toggle()
+function! s:YCM_syntax_toggle()
     let g:ycm_show_diagnostics_ui = xor(g:ycm_show_diagnostics_ui, 1)
 endfunction
-
-" syntastic
-" using python-mode to check syntax
-" let g:syntastic_python_flake8_quiet_messages = { 'regex': '\m\'.
-"             \'E201\|E202\|E222\|E228\|E231\|E265\|'.
-"             \'E501\|'.
-"             \'F403'}
-let g:syntastic_mode_map = { "passive_filetypes": ["python"] }
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_warning_symbol = '⚠'
-let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_quiet_warnings = 1
 nmap <leader>s :SyntasticToggleMode<CR>
-autocmd FileType c,cpp,objc,objcpp nmap <leader>s :call <SID>YCM_syntastic_toggle()<CR>
-" cpp
-let g:syntastic_cpp_checkers = []
-let g:syntastic_cpp_compiler_options = " -std=c++11 -stdlib=libc++"
+autocmd FileType c,cpp,objc,objcpp nmap <leader>s :call <SID>YCM_syntax_toggle()<CR>
 
 " python-mode
 let g:pymode_rope_complete_on_dot = 0  " solve conflict with YouCompleteMe
