@@ -19,6 +19,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'godlygeek/tabular'
 Plugin 'rking/ag.vim'
 Plugin 'Raimondi/delimitMate'
@@ -429,7 +430,8 @@ let g:vim_markdown_initial_foldlevel=1
 autocmd FileType c,cpp set commentstring=//\ %s
 
 " airline
-let g:airline_left_sep=''
-let g:airline_right_sep=''
+let g:airline_theme = "dark"
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#bufferline#enabled = 0
