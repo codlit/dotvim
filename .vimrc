@@ -301,7 +301,9 @@ function! FT_c()
     set cin
     set cinoptions=:0
     "set makeprg=gcc\ -Wall\ -D__DEBUG__\ -o\ %<.exe\ %
-    if g:coderoot != '' && filereadable(g:coderoot . '/.ycm_extra_conf.py')
+    if filereadable('./.ycm_extra_conf.py')
+        let g:ycm_global_ycm_extra_conf = './.ycm_extra_conf.py'
+    elseif g:coderoot != '' && filereadable(g:coderoot . '/.ycm_extra_conf.py')
         let g:ycm_global_ycm_extra_conf = g:coderoot . '/.ycm_extra_conf.py'
     else
         let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf/c.ycm_extra_conf.py'
@@ -312,7 +314,9 @@ function! FT_cpp()
     set cin
     set cinoptions=:0,g0
     "set makeprg=g++\ -Wall\ -D__DEBUG__\ -o\ %<.exe\ %
-    if g:coderoot != '' && filereadable(g:coderoot . '/.ycm_extra_conf.py')
+    if filereadable('./.ycm_extra_conf.py')
+        let g:ycm_global_ycm_extra_conf = './.ycm_extra_conf.py'
+    elseif g:coderoot != '' && filereadable(g:coderoot . '/.ycm_extra_conf.py')
         let g:ycm_global_ycm_extra_conf = g:coderoot . '/.ycm_extra_conf.py'
     else
         let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf/cpp.ycm_extra_conf.py'
