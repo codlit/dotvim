@@ -54,9 +54,8 @@ set nobackup
 set laststatus=2
 set showcmd        "在状态栏显示目前输入的命令
 set backspace=indent,eol,start
-set so=5  "当光标在窗口上下边界时距离边界2行即开始滚屏
+set so=5          " Minimum lines to keep above and below cursor
 " set scrolljump=-50              " Lines to scroll when cursor leaves screen
-" set scrolloff=0                 " Minimum lines to keep above and below cursor
 set go-=m  "不要菜单栏,工具栏(T),书签栏(B)
 set go-=T
 "set nowrap                      " Do not wrap long lines
