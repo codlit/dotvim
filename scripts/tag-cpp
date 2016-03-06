@@ -1,18 +1,18 @@
 #!/bin/sh
 
 CreateFilesList() {
-    find $PWD -name "*.h" -o -name "*.cpp" -o -name "*.cc" > gtags.files
+    find $PWD -name "*.h" -o -name "*.hpp" -o -name "*.cpp" -o -name "*.cxx" -o -name "*.cc" > gtags.files
 }
 
 CreateGtags() {
     gtags -f gtags.files
 }
 
-createCscope() {
+CreateCscope() {
     cscope -Rbq -i gtags.files
 }
 
-createTags() {
+CreateTags() {
     ctags -R --languages=c++ --c++-kinds=+px --fields=+iaS --extra=+q -L gtags.files
 }
 

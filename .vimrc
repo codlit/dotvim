@@ -252,7 +252,6 @@ function! GTAGS_add()
     endif
     set csverb
 endfunction
-autocmd BufRead *.c,*.cpp,*.h call GTAGS_add()
 " 映射 [[[2
 " 查找C语言符号, 即查找函数名、宏、枚举值等出现的地方
 nmap css :cs find s <C-R>=expand("<cword>")<CR><CR>
@@ -297,6 +296,7 @@ function! FT_xml()
 endfunction
 
 function! FT_c()
+    call GTAGS_add()
     set cin
     set cinoptions=:0
     "set makeprg=gcc\ -Wall\ -D__DEBUG__\ -o\ %<.exe\ %
@@ -310,6 +310,7 @@ function! FT_c()
 endfunction
 
 function! FT_cpp()
+    call GTAGS_add()
     set cin
     set cinoptions=:0,g0
     "set makeprg=g++\ -Wall\ -D__DEBUG__\ -o\ %<.exe\ %
@@ -366,6 +367,7 @@ autocmd FileType c,cpp,objc,objcpp nmap <leader>s :call <SID>YCM_syntax_toggle()
 
 " python-mode
 let g:pymode_rope_complete_on_dot = 0  " solve conflict with YouCompleteMe
+let g:pymode_breakpoint_bind = ''      " solve conflict with CtrlP
 let g:pymode_options_colorcolumn = 0
 let g:pymode_lint_ignore = "W0401,"
                          \."C901,"
