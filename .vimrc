@@ -19,7 +19,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'vim-airline/vim-airline'
-Plugin 'vim-easy-align'
+Plugin 'junegunn/vim-easy-align'
 Plugin 'rking/ag.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'octol/vim-cpp-enhanced-highlight'
@@ -328,13 +328,13 @@ function! FT_python()
     if !has('python')
         let g:pymode = 0
     endif
-    if g:coderoot != ''
+    let g:pymode_rope = 0  " disable rope by default
+    if isdirectory('.ropeproject')
         let g:pymode_rope = 1
-        let g:pymode_rope_ropefolder = g:coderoot . '/.ropeproject'
-    else
-        let g:pymode_rope = 0  " disable rope
+    elseif isdirectory(g:coderoot . '/.ropeproject')
+        let g:pymode_rope_project_root = g:coderoot
+        let g:pymode_rope = 1
     endif
-
     set foldmethod=indent
     set foldlevel=99
     set cuc
