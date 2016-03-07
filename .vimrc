@@ -362,13 +362,18 @@ nnoremap <leader>jj :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 function! s:YCM_syntax_toggle()
   let g:ycm_show_diagnostics_ui = xor(g:ycm_show_diagnostics_ui, 1)
+  if g:ycm_show_diagnostics_ui == 0
+    echo 'YCM Syntastic Off!'
+  else
+    echo 'YCM Syntastic On!'
+  endif
 endfunction
 " nmap <leader>s :SyntasticToggleMode<CR>
 autocmd FileType c,cpp,objc,objcpp nmap <leader>s :call <SID>YCM_syntax_toggle()<CR>
 
 " python-mode
 let g:pymode_rope_complete_on_dot = 0  " solve conflict with YouCompleteMe
-let g:pymode_breakpoint_bind = ''      " solve conflict with CtrlP
+let g:pymode_breakpoint = 0            " solve conflict with CtrlP
 let g:pymode_options_colorcolumn = 0
 let g:pymode_lint_ignore = "W0401,"
       \."C901,"
