@@ -15,7 +15,8 @@ Plugin 'gregsexton/gitv'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'tacahiroy/ctrlp-funky'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'vim-airline/vim-airline'
@@ -362,7 +363,7 @@ nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 function! s:YCM_syntax_toggle()
   let g:ycm_show_diagnostics_ui = xor(g:ycm_show_diagnostics_ui, 1)
 endfunction
-nmap <leader>s :SyntasticToggleMode<CR>
+" nmap <leader>s :SyntasticToggleMode<CR>
 autocmd FileType c,cpp,objc,objcpp nmap <leader>s :call <SID>YCM_syntax_toggle()<CR>
 
 " python-mode
@@ -394,15 +395,20 @@ let g:UltiSnipsJumpForwardTrigger="<C-f>"
 let g:UltiSnipsJumpBackwardTrigger="<C-b>"
 
 " CtrlP
-nmap <leader>t :CtrlP<CR>
-nmap <leader>b :CtrlPBuffer<CR>
-nmap <leader>T :CtrlPClearCache<CR>:CtrlP<CR>
+nmap <leader>ft :CtrlP<CR>
+nmap <leader>fb :CtrlPBuffer<CR>
+nmap <leader>fc :CtrlPClearCache<CR>:CtrlP<CR>
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/]\.(git|hg|svn)$',
       \ 'file': '\v\.(exe|so|dll)$',
       \ 'link': 'some_bad_symbolic_links',
       \ }
+
+" ctrlp-funky
+nmap <Leader>fu :CtrlPFunky<Cr>
+let g:ctrlp_funky_matchtype = 'path'
+let g:ctrlp_funky_syntax_highlight = 1
 
 " tagbar
 let g:tagbar_sort = 0
