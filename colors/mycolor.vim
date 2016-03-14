@@ -78,8 +78,8 @@ hi MoreMsg         guifg=#E6DB74
 hi Operator        guifg=#F92672
 
 " complete menu
-hi Pmenu           guifg=#66D9EF guibg=#000000
-hi PmenuSel                      guibg=#808080
+hi Pmenu           guifg=#1C1C1C guibg=darkgrey
+hi PmenuSel        guifg=black   guibg=lightgrey
 hi PmenuSbar                     guibg=#080808
 hi PmenuThumb      guifg=#66D9EF
 
@@ -175,8 +175,8 @@ if &t_Co > 255
   hi Operator        ctermfg=161
 
   " complete menu
-  hi Pmenu           ctermfg=81  ctermbg=16
-  hi PmenuSel                    ctermbg=244
+  hi Pmenu           ctermfg=234 ctermbg=246
+  hi PmenuSel        ctermfg=0   ctermbg=7
   hi PmenuSbar                   ctermbg=232
   hi PmenuThumb      ctermfg=81
 

@@ -24,8 +24,10 @@ Plugin 'junegunn/vim-easy-align'
 Plugin 'rking/ag.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'klen/python-mode'
 Plugin 'DoxygenToolkit.vim'
+Plugin 'hynek/vim-python-pep8-indent'
+Plugin 'hdima/python-syntax'
+Plugin 'scrooloose/syntastic'
 call vundle#end()
 
 filetype plugin indent on
@@ -105,10 +107,6 @@ hi cursorline cterm=underline  ctermbg=NONE
 "set completeopt=menuone,longest,preview
 set completeopt=menu,longest
 "set complete=.,w,b,u  " CTRL-P/N 和 C-x-l 的扫瞄范围
-highlight Pmenu    guibg=darkgrey  guifg=#1C1C1C
-highlight PmenuSel guibg=lightgrey guifg=black
-highlight Pmenu    ctermbg=246     ctermfg=234
-highlight PmenuSel ctermbg=7       ctermfg=0
 
 "see  :help last-position-jump
 " comment it, because when open .js it can't support syntax, so you should type  g'"  to go previous position
@@ -283,19 +281,13 @@ nmap cs<Space> :cs find
 
 " ---------- FileType ----------
 autocmd FileType xml,html,php call FT_xml()
-"编辑c文件
-autocmd FileType c call FT_c()
-"编辑cpp文件
-autocmd FileType cpp call FT_cpp()
-"编辑python
-let python_highlight_all = 1
-autocmd FileType python call FT_python()
-
 function! FT_xml()
   "inoremap </ </<c-x><c-o><Esc>a
   set cuc
 endfunction
 
+" C
+autocmd FileType c call FT_c()
 function! FT_c()
   call GTAGS_add()
   set cin
@@ -310,6 +302,8 @@ function! FT_c()
   endif
 endfunction
 
+" C++
+autocmd FileType cpp call FT_cpp()
 function! FT_cpp()
   call GTAGS_add()
   set cin
@@ -324,19 +318,13 @@ function! FT_cpp()
   endif
 endfunction
 
+" python
+autocmd FileType python call FT_python()
+let python_highlight_all = 1
 function! FT_python()
+  syn keyword pythonDecorator self
   set smartindent
   setlocal wrap  " wrap ,although pymode is on
-  if !has('python')
-    let g:pymode = 0
-  endif
-  let g:pymode_rope = 0  " disable rope by default
-  if isdirectory('.ropeproject')
-    let g:pymode_rope = 1
-  elseif isdirectory(g:coderoot . '/.ropeproject')
-    let g:pymode_rope_project_root = g:coderoot
-    let g:pymode_rope = 1
-  endif
   set foldmethod=indent
   set foldlevel=99
   set cuc
@@ -344,7 +332,6 @@ function! FT_python()
   let b:delimitMate_nesting_quotes = ['"', "'"]
   setlocal et ts=2 sw=2 sts=2
 endfunction
-
 
 " ---------- Plugins ----------
 " YouCompleteMe
@@ -360,7 +347,7 @@ nnoremap <leader>js :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>jg :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>jj :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
-function! s:YCM_syntax_toggle()
+function! s:YcmSyntaxToggle()
   let g:ycm_show_diagnostics_ui = xor(g:ycm_show_diagnostics_ui, 1)
   if g:ycm_show_diagnostics_ui == 0
     echo 'YCM Syntastic Off!'
@@ -368,16 +355,19 @@ function! s:YCM_syntax_toggle()
     echo 'YCM Syntastic On!'
   endif
 endfunction
-" nmap <leader>s :SyntasticToggleMode<CR>
-autocmd FileType c,cpp,objc,objcpp nmap <leader>s :call <SID>YCM_syntax_toggle()<CR>
+let g:ycm_error_symbol = '✗'
+let g:ycm_warning_symbol = '⚠'
+autocmd FileType c,cpp,objc,objcpp nmap <leader>s :call <SID>YcmSyntaxToggle()<CR>
 
-" python-mode
-let g:pymode_rope_complete_on_dot = 0  " solve conflict with YouCompleteMe
-let g:pymode_breakpoint = 0            " solve conflict with CtrlP
-let g:pymode_options_colorcolumn = 0
-let g:pymode_lint_ignore = "W0401,"
-      \."C901,"
-      \."E201,E202,E222,E227,E228,E231,E265,E302,E401,E501,E731"
+" syntastic
+let g:syntastic_mode_map = { "passive_filetypes": ["c", "cpp", "objc", "objcpp"] }
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
+nmap <leader>s :SyntasticToggleMode<CR>
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_python_checkers = ['pylint']
+" let g:syntastic_python_checkers = ['flake8']
+" let g:syntastic_python_flake8_args = '--select=F,C9 --max-complexity=10'
 
 " vim-bufferline
 " let g:bufferline_echo = 0
@@ -388,7 +378,7 @@ nmap <leader>g :GitGutterToggle<CR>
 
 " delimitMate
 let delimitMate_matchpairs = "(:),[:],{:}"
-let delimitMate_expand_cr = 1
+" let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
 let delimitMate_jump_expansion = 1
 
