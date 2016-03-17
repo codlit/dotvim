@@ -28,6 +28,7 @@ Plugin 'DoxygenToolkit.vim'
 Plugin 'hynek/vim-python-pep8-indent'
 Plugin 'hdima/python-syntax'
 Plugin 'scrooloose/syntastic'
+Plugin 'google/vim-searchindex'
 call vundle#end()
 
 filetype plugin indent on
@@ -342,32 +343,34 @@ let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_show_diagnostics_ui = 0  "Don't use ycm's syntax checker
+let g:ycm_register_as_syntastic_checker = 1
 let g:ycm_always_populate_location_list = 1 "default 0
 nnoremap <leader>js :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>jg :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>jj :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
-function! s:YcmSyntaxToggle()
-  let g:ycm_show_diagnostics_ui = xor(g:ycm_show_diagnostics_ui, 1)
-  if g:ycm_show_diagnostics_ui == 0
-    echo 'YCM Syntastic Off!'
-  else
-    echo 'YCM Syntastic On!'
-  endif
-endfunction
-let g:ycm_error_symbol = '✗'
-let g:ycm_warning_symbol = '⚠'
-autocmd FileType c,cpp,objc,objcpp nmap <leader>s :call <SID>YcmSyntaxToggle()<CR>
+" autocmd FileType c,cpp,objc,objcpp let g:ycm_show_diagnostics_ui = 0  " fix a bug
+" autocmd FileType c,cpp,objc,objcpp nmap <leader>s :call <SID>YcmSyntaxToggle()<CR>
+" function! s:YcmSyntaxToggle()
+"   let g:ycm_show_diagnostics_ui = xor(g:ycm_show_diagnostics_ui, 1)
+"   if g:ycm_show_diagnostics_ui == 0
+"     echo 'YCM Syntastic Off!'
+"   else
+"     echo 'YCM Syntastic On!'
+"   endif
+" endfunction
+let g:ycm_error_symbol = '❌'
+let g:ycm_warning_symbol = '⚠️'
 
 " syntastic
-let g:syntastic_mode_map = { "passive_filetypes": ["c", "cpp", "objc", "objcpp"] }
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_warning_symbol = '⚠'
+" let g:syntastic_mode_map = { "passive_filetypes": ["c", "cpp", "objc", "objcpp"] }
+let g:syntastic_error_symbol = '❌'
+let g:syntastic_warning_symbol = '⚠️'
 nmap <leader>s :SyntasticToggleMode<CR>
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_python_checkers = ['pylint']
 " let g:syntastic_python_checkers = ['flake8']
-" let g:syntastic_python_flake8_args = '--select=F,C9 --max-complexity=10'
+" let g:syntastic_python_flake8_args = '--select=F,W,C9 --max-complexity=10'
 
 " vim-bufferline
 " let g:bufferline_echo = 0
