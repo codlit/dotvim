@@ -368,9 +368,10 @@ let g:syntastic_error_symbol = '❌'
 let g:syntastic_warning_symbol = '⚠️'
 nmap <leader>s :SyntasticToggleMode<CR>
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_python_checkers = ['pylint']
-" let g:syntastic_python_checkers = ['flake8']
-" let g:syntastic_python_flake8_args = '--select=F,W,C9 --max-complexity=10'
+" let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_python_flake8_args = '--select=F,W,C9 --max-complexity=10'
+let g:syntastic_python_flake8_quiet_messages = { "regex": '\mF403' }
 
 " vim-bufferline
 " let g:bufferline_echo = 0
