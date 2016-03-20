@@ -253,21 +253,21 @@ function! GTAGS_add()
   set csverb
 endfunction
 " 映射 [[[2
-" 查找C语言符号, 即查找函数名、宏、枚举值等出现的地方
+" Find symbol
 nmap css :cs find s <C-R>=expand("<cword>")<CR><CR>
-" 查找函数、宏、枚举等定义的位置, 类似ctags所提供的功能
+" Find definition
 nmap csg :cs find g <C-R>=expand("<cword>")<CR><CR>
-" 查找调用本函数的函数
+" Find functions calling this function
 nmap csc :cs find c <C-R>=expand("<cword>")<CR><CR>
-" 查找指定的字符串
+" Find text string
 nmap cst :cs find t <C-R>=expand("<cword>")<CR><CR>
-" 查找egrep模式, 相当于egrep功能, 但查找速度快多了
+" Find egrep pattern
 nmap cse :cs find e <C-R>=expand("<cword>")<CR><CR>
-" 查找并打开文件, 类似vim的find功能
+" Find path
 nmap csf :cs find f <C-R>=expand("<cfile>")<CR><CR>
-" 查找包含本文件的文件
+" Find include file
 nmap csi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-" 自己来输入命令
+" Find custom command
 nmap cs<Space> :cs find
 
 " Enable omni completion.
