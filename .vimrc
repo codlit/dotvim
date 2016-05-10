@@ -89,8 +89,8 @@ set softtabstop=2   "backspace一次消除4个空格
 set nojoinspaces    " Prevents inserting two spaces after punctuation on a join (J)
 set fdm=marker
 "set spell
-set guifont=Courier_New:h12:cANSI
-set guifont=文泉驿等宽微米黑\ 12
+" set guifont=Courier_New:h12:cANSI
+" set guifont=文泉驿等宽微米黑\ 12
 set guifont=Monaco:h12
 if has('gui_running')
   set transparency=18
@@ -382,7 +382,7 @@ nmap <leader>g :GitGutterToggle<CR>
 
 " delimitMate
 let delimitMate_matchpairs = "(:),[:],{:}"
-" let delimitMate_expand_cr = 1
+let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
 let delimitMate_jump_expansion = 1
 
