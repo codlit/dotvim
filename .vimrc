@@ -1,3 +1,14 @@
+" Identify platform. From spf13
+silent function! OSX()
+    return has('macunix')
+endfunction
+silent function! LINUX()
+    return has('unix') && !has('macunix') && !has('win32unix')
+endfunction
+silent function! WINDOWS()
+    return  (has('win32') || has('win64'))
+endfunction
+
 set nocompatible
 filetype off
 "Vundle
@@ -88,12 +99,19 @@ set shiftwidth=2
 set softtabstop=2   "backspace一次消除4个空格
 set nojoinspaces    " Prevents inserting two spaces after punctuation on a join (J)
 set fdm=marker
-"set spell
+" set spell
+
+" Fonts
 " set guifont=Courier_New:h12:cANSI
 " set guifont=文泉驿等宽微米黑\ 12
-set guifont=Monaco:h12
-if has('gui_running')
+if OSX()
+  set guifont=Monaco:h12
+endif
+
+if has('transparency')
   set transparency=18
+endif
+if has('gui_running')
   set lines=32 columns=95
 endif
 
