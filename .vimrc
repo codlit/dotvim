@@ -156,16 +156,16 @@ map <c-h> <c-w>h
 " Set mapleader
 let mapleader = ","
 
-nmap <Space> i<Space><Esc>l
+nnoremap <Space> i<Space><Esc>l
 inoremap <C-e> <Esc>A
 inoremap <C-a> <Esc>I
 
 " Buffer
-nmap <leader>lb :buffers<CR>
-nmap <leader>dc :bdelete %<CR>
-nmap <leader>dp :bdelete #<CR>
+nnoremap <leader>lb :buffers<CR>
+nnoremap <leader>dc :bdelete %<CR>
+nnoremap <leader>dp :bdelete #<CR>
 " " Don't close window, when deleting a buffer
-nmap <leader>dd :Bclose<CR>
+nnoremap <leader>dd :Bclose<CR>
 command! Bclose call <SID>BufcloseCloseIt()
 function! <SID>BufcloseCloseIt()
   let l:currentBufNum = bufnr("%")
@@ -195,40 +195,40 @@ function! s:LListToggle()
     execute "silent! lopen"
   endif
 endfunction
-nmap <leader>ll :call <SID>LListToggle()<CR>
+nnoremap <leader>ll :call <SID>LListToggle()<CR>
 
 " Map <leader>ff to display all lines with keyword under cursor
 " and ask which one to jump to
-nmap <leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
+nnoremap <leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
 " rename word
-nmap gr :%s/\C\<<C-R>=expand("<cword>")<CR>\>//gc<left><left><left>
+nnoremap gr :%s/\C\<<C-R>=expand("<cword>")<CR>\>//gc<left><left><left>
 
 " When pressing <leader>cd switch to the directory of the open buffer
-map <leader>cd :cd %:p:h<CR>
+nnoremap <leader>cd :cd %:p:h<CR>
 
 "针对长行调整移动
 set display=lastline
 function! MapFlow()
-  nmap j gj
-  nmap k gk
-  nmap 0 g0
-  nmap ^ g^
-  nmap $ g$
+  nnoremap j gj
+  nnoremap k gk
+  nnoremap 0 g0
+  nnoremap ^ g^
+  nnoremap $ g$
 endfunction
 function! UnMapFlow()
-  unmap j
-  unmap k
-  unmap 0
-  unmap ^
-  unmap $
+  nunmap j
+  nunmap k
+  nunmap 0
+  nunmap ^
+  nunmap $
 endfunction
 command! MapFlow :call MapFlow()
 command! UnMapFlow :call UnMapFlow()
 " call MapFlow()
 
 "make the column where the cursor is highlighted or not
-nmap <leader>hc :call SetColorColumn()<CR>
+nnoremap <leader>hc :call SetColorColumn()<CR>
 function! SetColorColumn()
   let col_num = virtcol(".")
   let cc_list = split(&cc, ',')
@@ -272,21 +272,21 @@ function! GTAGS_add()
 endfunction
 " 映射 [[[2
 " Find symbol
-nmap css :cs find s <C-R>=expand("<cword>")<CR><CR>
+nnoremap css :cs find s <C-R>=expand("<cword>")<CR><CR>
 " Find definition
-nmap csg :cs find g <C-R>=expand("<cword>")<CR><CR>
+nnoremap csg :cs find g <C-R>=expand("<cword>")<CR><CR>
 " Find functions calling this function
-nmap csc :cs find c <C-R>=expand("<cword>")<CR><CR>
+nnoremap csc :cs find c <C-R>=expand("<cword>")<CR><CR>
 " Find text string
-nmap cst :cs find t <C-R>=expand("<cword>")<CR><CR>
+nnoremap cst :cs find t <C-R>=expand("<cword>")<CR><CR>
 " Find egrep pattern
-nmap cse :cs find e <C-R>=expand("<cword>")<CR><CR>
+nnoremap cse :cs find e <C-R>=expand("<cword>")<CR><CR>
 " Find path
-nmap csf :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nnoremap csf :cs find f <C-R>=expand("<cfile>")<CR><CR>
 " Find include file
-nmap csi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nnoremap csi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 " Find custom command
-nmap cs<Space> :cs find
+nnoremap cs<Space> :cs find
 
 " Enable omni completion.
 "autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -368,7 +368,7 @@ nnoremap <leader>jg :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>jj :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 " autocmd FileType c,cpp,objc,objcpp let g:ycm_show_diagnostics_ui = 0  " fix a bug
-" autocmd FileType c,cpp,objc,objcpp nmap <leader>s :call <SID>YcmSyntaxToggle()<CR>
+" autocmd FileType c,cpp,objc,objcpp nnoremap <leader>s :call <SID>YcmSyntaxToggle()<CR>
 " function! s:YcmSyntaxToggle()
 "   let g:ycm_show_diagnostics_ui = xor(g:ycm_show_diagnostics_ui, 1)
 "   if g:ycm_show_diagnostics_ui == 0
@@ -384,7 +384,7 @@ let g:ycm_warning_symbol = '⚠️'
 " let g:syntastic_mode_map = { "passive_filetypes": ["c", "cpp", "objc", "objcpp"] }
 let g:syntastic_error_symbol = '❌'
 let g:syntastic_warning_symbol = '⚠️'
-nmap <leader>s :SyntasticToggleMode<CR>
+nnoremap <leader>s :SyntasticToggleMode<CR>
 let g:syntastic_always_populate_loc_list = 1
 " let g:syntastic_python_checkers = ['pylint']
 let g:syntastic_python_checkers = ['flake8']
@@ -396,7 +396,7 @@ let g:syntastic_python_flake8_quiet_messages = { "regex": '\mF403' }
 
 " vim-gitgutter
 let g:gitgutter_enabled = 0
-nmap <leader>g :GitGutterToggle<CR>
+nnoremap <leader>g :GitGutterToggle<CR>
 
 " delimitMate
 let delimitMate_matchpairs = "(:),[:],{:}"
@@ -412,9 +412,9 @@ let g:UltiSnipsJumpForwardTrigger="<C-f>"
 let g:UltiSnipsJumpBackwardTrigger="<C-b>"
 
 " CtrlP
-nmap <leader>ft :CtrlP<CR>
-nmap <leader>fb :CtrlPBuffer<CR>
-nmap <leader>fc :CtrlPClearCache<CR>:CtrlP<CR>
+nnoremap <leader>ft :CtrlP<CR>
+nnoremap <leader>fb :CtrlPBuffer<CR>
+nnoremap <leader>fc :CtrlPClearCache<CR>:CtrlP<CR>
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/]\.(git|hg|svn)$',
@@ -423,31 +423,31 @@ let g:ctrlp_custom_ignore = {
       \ }
 
 " ctrlp-funky
-nmap <Leader>fu :CtrlPFunky<Cr>
+nnoremap <leader>fu :CtrlPFunky<Cr>
 let g:ctrlp_funky_matchtype = 'path'
 let g:ctrlp_funky_syntax_highlight = 1
 
 " tagbar
 let g:tagbar_sort = 0
-nmap <silent> <F4> :TagbarToggle<CR>
+nnoremap <silent> <F4> :TagbarToggle<CR>
 let g:tagbar_width = 30
 let g:tagbar_ctags_bin = 'ctags'
 
 " Tabular
-nmap <leader>a& :Tabularize /&<CR>
-vmap <leader>a& :Tabularize /&<CR>
-nmap <leader>a= :Tabularize /=<CR>
-vmap <leader>a= :Tabularize /=<CR>
-nmap <leader>a: :Tabularize /:<CR>
-vmap <leader>a: :Tabularize /:<CR>
-nmap <leader>a:: :Tabularize /:\zs<CR>
-vmap <leader>a:: :Tabularize /:\zs<CR>
-nmap <leader>a, :Tabularize /,<CR>
-vmap <leader>a, :Tabularize /,<CR>
-nmap <leader>a,, :Tabularize /,\zs<CR>
-vmap <leader>a,, :Tabularize /,\zs<CR>
-nmap <leader>a<Bar> :Tabularize /<Bar><CR>
-vmap <leader>a<Bar> :Tabularize /<Bar><CR>
+nnoremap <leader>a& :Tabularize /&<CR>
+vnoremap <leader>a& :Tabularize /&<CR>
+nnoremap <leader>a= :Tabularize /=<CR>
+vnoremap <leader>a= :Tabularize /=<CR>
+nnoremap <leader>a: :Tabularize /:<CR>
+vnoremap <leader>a: :Tabularize /:<CR>
+nnoremap <leader>a:: :Tabularize /:\zs<CR>
+vnoremap <leader>a:: :Tabularize /:\zs<CR>
+nnoremap <leader>a, :Tabularize /,<CR>
+vnoremap <leader>a, :Tabularize /,<CR>
+nnoremap <leader>a,, :Tabularize /,\zs<CR>
+vnoremap <leader>a,, :Tabularize /,\zs<CR>
+nnoremap <leader>a<Bar> :Tabularize /<Bar><CR>
+vnoremap <leader>a<Bar> :Tabularize /<Bar><CR>
 
 " plasticboy/vim-markdown
 let g:vim_markdown_folding_disabled=1
